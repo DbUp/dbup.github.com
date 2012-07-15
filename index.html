@@ -3,64 +3,102 @@
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <title>DbUp by DbUp</title>
+    <title>DbUp: Easy SQL Server change script runner</title>
   </head>
 
   <body>
     <div id="container">
       <div class="inner">
-
         <header>
           <h1>DbUp</h1>
-          <h2>Home page</h2>
         </header>
 
-        <section id="downloads" class="clearfix">
-          <a href="https://github.com/DbUp" id="view-on-github" class="button"><span>View on GitHub</span></a>
-        </section>
+        <section class="content">
+          <article>
+<p><strong>DbUp is a .NET library that helps you to deploy changes to SQL Server databases</strong>. It tracks which SQL scripts have been run already, and runs the change scripts that are needed to get your database up to date.</p>
 
-        <hr>
+<h2>Getting started</h2>
 
-        <section id="main_content">
-          <h3>Welcome to GitHub Pages.</h3>
+<p>Start by creating a simple C# console project in Visual Studio, and adding your SQL scripts to it. From the Properties window, mark them as Embedded Resources:</p>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<img src="images/dbupsample.png" alt="DbUp Sample" />
+
+<p>Next, use NuGet to install the DbUp package:</p>
+
+<pre><code>Install-Package DbUp</code></pre>
+
+<p>Finally, in <code>Program.cs</code>, add the following code:</p>
 
 <pre><code>$ cd your_repo_root/repo_name
 $ git fetch origin
 $ git checkout gh-pages
 </code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>You now have a console application that can run change scripts against your database! After running it, you'll see something like this:</p>
 
-<h3>Designer Templates</h3>
+<pre><code>$ cd your_repo_root/repo_name
+$ git fetch origin
+$ git checkout gh-pages
+</code></pre>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
 
-<h3>Rather Drive Stick?</h3>
+<p>The next time you run it, you'll see:</p>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<pre><code>$ cd your_repo_root/repo_name
+$ git fetch origin
+$ git checkout gh-pages
+</code></pre>
 
-<h3>Authors and Contributors</h3>
+<h2>Why a console application?</h2>
+<p>
+  By putting your migration scripts in an executable that can be run, you'll get a lot of benefits:
+</p>
+<ol>
+  <li>You can hit F5 at any time to test the migration scripts</li>
+  <li>Other developers on your team can do the same</li>
+  <li>You can execute them as part of an automated deployment</li>
+  <li>You can run it during your integration tests</li>
+  <li>Since it's in your VS solution, it will go into source control along with the rest of your code</li>
+</ol>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<p>Alternatively, instead of a console application, you can create a class library that references DbUp, and embed it into a maintenance screen inside your application.</p>
 
-<h3>Support or Contact</h3>
+<p>Check out this blog post to learn more about <a href="http://www.paulstovell.com/database-deployment">the philosophy behind DbUp</a>.</p>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<h2>Journaling</h2>
+<p>
+  By default, DbUp adds a table to your SQL Server database called SchemaVersions, which tracks the scripts that have already been executed. Before running, DbUp checks this table to work out which scripts should be skipped. 
+</p>
+<p>
+  You can change the name of this table using:
+</p>
+<pre><code>Blah</code></pre>
+
+<p>You can ask DbUp whether scripts need to be run, without actually running them, using:</p>
+<pre><code></code></pre>
+
+<p>Or, you can implement your own <code>IJournal</code> to track the scripts yourself. Most parts of DbUp are exensible in this way; just browse the API to see what it can do.</p> 
+
+<h2>Resources</h2>
+
+<p>DbUp is open source, licensed under the MIT license. The <a href="http://github.com/dbup/dbup">source code is on GitHub</a>. We also have a <a href="https://groups.google.com/forum/?fromgroups#!forum/dbup-discuss">discussion group on Google Groups</a> if you have any questions, and you can report bugs (ideally with a pull request attached!) to the <a href="https://github.com/DbUp/DbUp/issues">issues page</a>.</p>
+
+<p>
+  DbUp began life as the database migration tool inside <a href="http://www.funnelweblog.org">FunnelWeb</a>, an open source ASP.NET MVC blog engine. Despite its humble origins, growing up, DbUp always thought it could aspire to something bigger. Now it is out in the world on its own, making its own way in life, the little script runner that could. 
+</p>
+
+          </article>
         </section>
 
         <footer>
-          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.
+          
         </footer>
 
+<a href="https://github.com/dbup/dbup"><img style="position: absolute; top: 0; right: 0; border: 0; padding: 0" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
         
       </div>
     </div>
