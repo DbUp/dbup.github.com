@@ -96,7 +96,7 @@
 </p>
 <img src="images/schema-versions.png" alt="The SchemaVersions table created by DbUp" />
 <p>
-  You can change the name of this table using:
+  You can change the schema and/or name of this table using the `JournalToSqlTable` extension method:
 </p>
 <pre><code>DeployChanges.To
     .SqlDatabase(connectionString)
@@ -106,6 +106,21 @@
     .Build();
 </code></pre>
 
+<p>If you want to always apply certain scripts -- typically idempotent scripts that drop and create things like functions, views, procedures, and permissions -- you can use the `NullJournal` class:</p>
+<pre><code>var upgrader =
+    DeployChanges.To
+        .SqlDatabase(connectionString)
+        .WithScriptsEmbeddedInAssembly(
+            Assembly.GetExecutingAssembly(),
+            s => s.Contains("everytime"))
+        .JournalTo(new NullJournal())
+        .LogToConsole()
+        .Build();
+</code></pre>
+
+<p>You can also implement your own <code>IJournal</code> to track the scripts yourself. Most parts of DbUp are extensible in this way; just browse the API to see what it can do.</p> 
+
+<h2>What if...</h2>
 <p>You can ask DbUp whether scripts need to be run, without actually running them, using:</p>
 <pre><code>var upgrader =
     DeployChanges.To
@@ -116,8 +131,6 @@
 
 var isRequired = upgrader.IsUpgradeRequired();
 </code></pre>
-
-<p>Or, you can implement your own <code>IJournal</code> to track the scripts yourself. Most parts of DbUp are exensible in this way; just browse the API to see what it can do.</p> 
 
 <h2>Supported databases</h2>
 
