@@ -1,4 +1,4 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
+/* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
 */
@@ -11,8 +11,8 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 	margin: 0;
@@ -23,7 +23,7 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
+article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
@@ -49,7 +49,7 @@ table {
 /* LAYOUT STYLES */
 body {
   font: 14px Helvetica,arial,freesans,clean,sans-serif;
-  line-height: 1.5; 
+  line-height: 1.5;
   background: #fff;
   font-family: 'Helvetica Neue', Helvetica, Arial, serif;
   color: #333;
@@ -109,7 +109,7 @@ section.menu {
 article {
   background-color: white;
   border: 1px solid #CACACA;
-  padding: 30px;  
+  padding: 30px;
 }
 
 #container .inner img {
@@ -125,7 +125,7 @@ a.button {
   font-size: 14px;
   padding: 12px 8px 12px 8px;
   display: block;
-  margin-right: 14px;  
+  margin-right: 14px;
 }
 a.button:hover {
 }
@@ -210,14 +210,14 @@ th {
 
 td {
   border: 1px solid #ebebeb;
-  text-align: center; 
+  text-align: center;
   font-weight: 300;
 }
 
 form {
   background: #f2f2f2;
   padding: 20px;
-  
+
 }
 
 
@@ -230,7 +230,7 @@ h1 {
   background-repeat: no-repeat;
   height: 86px;
   margin: 0;
-} 
+}
 
 h2 {
   font-size: 24px;
@@ -238,32 +238,32 @@ h2 {
   border-bottom: 1px solid #CCC;
   color: black;
   margin: 20px 0 10px;
-} 
+}
 
 h3 {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 8px;
-} 
- 
+}
+
 h4 {
   font-size: 16px;
   font-weight: bold;
-} 
+}
 
 h5 {
   font-size: 1em;
-} 
+}
 
 h6 {
   font-size: .8em;
-} 
+}
 
 p {
   font-weight: 300;
   margin-bottom: 20px;
 }
- 
+
 a {
   text-decoration: none;
 }
@@ -324,7 +324,7 @@ footer a:hover {
 
 img {
   padding: 5px;
-  border: 1px solid #ccc;
+  border: 0px;
   margin-bottom: 10px;
   border-radius: 5px;
 }
